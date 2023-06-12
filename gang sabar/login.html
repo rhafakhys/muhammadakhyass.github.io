@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="icon" href="phi.png" />
+  </head>
+  <style>
+    *,
+    html {
+      padding: 0;
+      margin: 0;
+    }
+
+    
+
+    #loginpatch {
+      text-decoration: none;
+      display: contents;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(43, 85, 108);
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+
+    #h {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      color: black;
+      margin-bottom: 10px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    #root {
+      position: absolute;
+      text-align: center;
+      list-style-type: none;
+      display: list-item;
+      background-color: white;
+      color: white;
+      font-size: 2em;
+      justify-content: center;
+      align-items: center;
+      height: 35vh;
+      width: 55vh;
+      margin-top: 30px;
+      border-style: groove;
+      border-color: black;
+      border-radius: 10px;
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    #usernameInput {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      width: 250px;
+      font-size: 15px;
+      margin: 10px;
+      stroke: black 5px;
+    }
+
+    #passwordInput {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      height: 30px;
+      width: 250px;
+      font-size: 15px;
+    }
+
+    #loginButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      margin-bottom: 0;
+      height: 30px;
+      width: 60px;
+    }
+
+    #logoutButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 130px;
+      height: 30px;
+      width: 60px;
+      margin-top: 50px;
+    }
+
+    #admin {
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      font-style: italic;
+      font-family: monospace;
+      color: black;
+      margin-left: 10px;
+    }
+
+    #client {
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      font-style: italic;
+      font-family: monospace;
+      color: black;
+      margin-left: 10px;
+    }
+
+    #h {
+      margin: 5px;
+    }
+
+    #wrong {
+      text-align: center;
+      font-size: 15px;
+      font-style: italic;
+      font-family: monospace;
+      color: red;
+    }
+  </style>
+
+  <body>
+    <!-- ini content kita -->
+    <div id="loginpatch">
+      <div id="root">
+        <h1 id="h">-Silahkan Login Disini-</h1>
+        <input type="text" placeholder="username" id="usernameInput" />
+        <input type="password" placeholder="password" id="passwordInput" />
+        <button onclick="onLogin()" id="loginButton">LOGIN</button>
+        <br />
+        <h1 id="wrong">Username Atau Password Tidak Terdaftar</h1>
+        <h1 id="admin">LOGIN SEBAGAI ADMIN</h1>
+        <h1 id="client">LOGIN SEBAGAI CLIENT</h1>
+        <button onclick="onLogout()" id="logoutButton">LOGOUT</button>
+      </div>
+    </div>
+
+    <script type="application/javascript">
+      let h = document.getElementById('h');
+      let usernameInput = document.getElementById('usernameInput');
+      let passwordInput = document.getElementById('passwordInput');
+      let loginButton = document.getElementById('loginButton');
+      let wrong = document.getElementById('wrong');
+      let logoutButton = document.getElementById('logoutButton');
+      let admin = document.getElementById('admin');
+      let client = document.getElementById('client');
+
+      wrong.style.display = 'none';
+      admin.style.display = 'none';
+      client.style.display = 'none';
+      logoutButton.style.display = 'none';
+
+      function onLogin() {
+        localStorage.setItem('username', usernameInput.value);
+        logoutButton.style.display = 'block';
+        h.style.display = 'none';
+        wrong.style.display = 'none';
+
+        if (usernameInput.value == 'bingung11' && passwordInput.value == 'Muhammadakhys') {
+          localStorage.setItem('role', 'admin');
+          usernameInput.style.display = 'none';
+          passwordInput.style.display = 'none';
+          loginButton.style.display = 'none';
+          wrong.style.display = 'none';
+          admin.style.display = 'block';
+          client.style.display = 'none';
+          location.href = 'file:///C:/kavling%20kaliabang%20tengah%201/gang%20sabar/biodatadiri.html';
+        } else {
+          h.style.display = 'block';
+          logoutButton.style.display = 'none';
+          wrong.style.display = 'block';
+          localStorage.clear();
+        }
+      }
+
+      if (localStorage.getItem('username')) {
+        usernameInput.style.display = 'none';
+        passwordInput.style.display = 'none';
+        loginButton.style.display = 'none';
+        h.style.display = 'none';
+        logoutButton.style.display = 'block';
+        if (localStorage.getItem('role') == admin) {
+          admin.style.display = 'block';
+          client.style.display = 'none';
+        } else {
+          localStorage.clear();
+          location.reload();
+        }
+      }
+
+      function onLogout() {
+        localStorage.clear();
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
